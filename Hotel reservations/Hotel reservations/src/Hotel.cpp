@@ -26,10 +26,10 @@ Book* Hotel::get_book_by_code(int book_id) { // anaktisi kratisis apo kodiko
 }
 
 bool Hotel::add_book_to_room(Book* book, int roomcode) { //prosthiki kratisis se domatio
-	bool test = get_room_by_code(roomcode)->addBook(book);
+	bool test = get_room_by_code(roomcode)->addBook(book); // TODO fix id is always 0 and last book is also the new book?
 	if (test) {
 		books_List.push_back(book);
-		std::cout << "Booking was successful." << std::endl;
+		std::cout << "Reservation with id: " << book->getBookNumber() << " added to room with id: " << roomcode << std::endl;
 		return true;
 	}
 	else {
@@ -45,7 +45,7 @@ int Hotel::add_booking(Book* book) //prosthiki kratisis
 	for (int i = 0; i < rooms_List.size()-1; i++){
 		if (rooms_List.at(i)->addBook(book)){
 			books_List.push_back(book);
-			std::cout << "Booking was succesfull!The booking code is " << book->getBookNumber() << std::endl;
+			std::cout << "Booking was successful!The booking code is " << book->getBookNumber() << std::endl;
 			return value = rooms_List.at(i)->getRoomNumber();
 		}
 	}
@@ -80,15 +80,16 @@ double Hotel::calculate_income() {	// upologismos esodon;sunolika esoda
 }
 
 void Hotel::booking_plan() { //plano kratiseon
-	std::cout << "Room    01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30" << std::endl;
+	std::cout << " Room    01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30" << std::endl;
 	for (int i = 0; i<rooms_List.size(); i++) {
-		std::cout << " " << rooms_List.at(i)->getRoomNumber() << "  " << std::endl;
+		std::cout << "  " << rooms_List.at(i)->getRoomNumber() << "_ \t ";
 		for (int j = 0; j<30; j++) {
 			if (rooms_List.at(i)->availability[j] == NULL)
-				std::cout << "_ ";
+				std::cout << "_  ";
 			else
-				std::cout << "* ";
+				std::cout << "*  ";
 		}
+		std::cout << "\n\n";
 	}
 	std::cout << "" << std::endl;
 }

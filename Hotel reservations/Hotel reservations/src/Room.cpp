@@ -22,25 +22,33 @@ void Room::setPricePerson(double pricePerson) {
 }
  bool Room::addBook(Book* new_book) {
 	 if (new_book->getPeople() <= maxCapacity) {
-	     if(new_book->getArrival()+new_book->getDaysOfResidence()<30){ //TODO make variables for these results and fix IF block
-	     	  for (unsigned int i = new_book->getArrival() - 1; i < new_book->getArrival() + new_book->getDaysOfResidence() - 1; i++) {
-	     	 		 if (availability[i] == NULL){
-	     	 		 availability[i] = new_book; 
-	     	 		 new_book->setRoom(this); 
-	     	 	 }
-	     	 	 else{
-	     	 	 return false;
-	     	 	 }
-	     	  }
-	     	  return true;
-	     
-	     return false;
+		 int res_arrival = new_book->getArrival();
+		 int res_days_residence = new_book->getDaysOfResidence();
+		 if (res_arrival + res_days_residence-1 <= 30) { //TODO make variables for these results and fix IF block
+			 for (unsigned int i = res_arrival - 1; i < res_arrival + res_days_residence - 1; i++) {
+				 if (availability[i] != NULL) {
+					 return false;
+				 }
+			 }
+			 for (unsigned int i = res_arrival - 1; i < res_arrival + res_days_residence - 1; i++) {
+				 availability[i] = new_book;
+				 new_book->setRoom(this);
+			 }
 		 }
+		 else {
+			 std::cout << "The room is either already booked or is too small" << std::endl;
+			 return false;
+		 }
+		 return true;
 	 }
-	 else
-		 std::cout << "The room is either already booked or is too small" << std::endl;
-	 return false;
+	 
+	 else {
+		 std::cout << "The room is too small" << std::endl;
+		 return false;
+	 }
  }
+
+ 
 
 		double Room::pricing() {
 			double final_price = 0;
@@ -58,7 +66,7 @@ void Room::setPricePerson(double pricePerson) {
 		}
 
 		int Room::percentage() {
-			int percentCount = 0;
+			double percentCount = 0;
 			for (unsigned int i = 0; i<availability.size(); i++)
 			{
 				if (availability[i] != NULL)

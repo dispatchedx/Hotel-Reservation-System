@@ -92,23 +92,15 @@ int main() {
 		//std::cin.ignore();
 		std::cin >> input;
 
-
-		int room_id = 0;
-		int arrival = 0;
-		int days = 0;
-		int people = 0;
-		bool code = false;
-		int cancel_id = 0;
-		std::string answer = "";
 		switch (input) {
 		case 1:
-			//	Book newbook;
-				//std::string cName;
-				//int arrival = 0;
-				//int days = 0;
-				//int people = 0;
-				//bool code = false;
-				//int room_id = 0;
+		{ // putting brackets inside cases allows the initialization of variables, since scope is now specific to each case
+			int room_id = -1;
+			int arrival = -1;
+			int days = -1;
+			int people = -1;
+			std::string answer = "";
+
 			std::cout << "What is your name?" << std::endl;
 			std::cin.ignore();
 			getline(std::cin, cName);
@@ -118,44 +110,44 @@ int main() {
 			std::cin >> days;
 			std::cout << "How many people will stay?" << std::endl;
 			std::cin >> people;
-
-			newbook->setCustomerName(cName);
-			newbook->setArrival(arrival);
-			newbook->setPeople(people);
-			newbook->setDaysOfResidence(days);
+			Book* p_newbook = new Book(cName, arrival, people, days);
 			std::cout << "Would you like a specific room? (y for yes n for no)" << std::endl;
 			std::cin >> answer;
-
-
 			if (answer == "y") {
 				std::cout << "What is the room's ID?" << std::endl;
 				std::cin >> room_id;
 
 				if (Winston.get_room_by_code(room_id) != NULL) {
-					Winston.add_book_to_room(newbook, room_id);
+					Winston.add_book_to_room(p_newbook, room_id);
 				}
 			}
 			else {
-				Winston.add_booking(newbook);
+				Winston.add_booking(p_newbook);
 			}
-
 			break;
+		}
 		case 2:
-			//int cancel_id = 0;
+		{
+			int cancel_id = -1;
 
 			std::cout << "What is the booking ID you want to cancel?" << std::endl;
 			std::cin >> cancel_id;
 			Winston.cancel_booking(cancel_id); //TODO this doesnt work need to fix, also prob something wrong with roomid/bookid
 			break;
+		}
 		case 3:
+		{
 			std::cout << "Booking id | Name of Customer | Room id" << std::endl;
 			for (int i = 0; i <= Winston.books_List.size() - 1; i++) {
-				std::cout << Winston.books_List.at(i)->getBookNumber() + "\t |"; //TODO not working/appearing
-				std::cout << Winston.books_List.at(i)->getCustomerName() + " \t|";
+				int reservation_id = Winston.books_List.at(i)->getBookNumber();
+				std::cout << " " << reservation_id << "\t | "; 
+				std::cout << Winston.books_List.at(i)->getCustomerName() << " \t| ";
 				std::cout << Winston.books_List.at(i)->getRoom().getRoomNumber() << std::endl;
 			}
 			break;
+		}
 		case 4:
+		{
 			std::cout << "room code | percentage | Income from this room" << std::endl;
 			for (int i = 0; i < Winston.rooms_List.size(); i++) {
 				std::cout << Winston.rooms_List.at(i)->getRoomNumber() << "\t  | ";
@@ -163,24 +155,29 @@ int main() {
 				std::cout << Winston.rooms_List.at(i)->pricing() << std::endl;
 			}
 			break;
+		}
 		case 5:
+		{
 			Winston.booking_plan();
 			break;
+		}
 		case 6:
+		{
 			int rooms_id = -1;
-			code = false;
+			std::string answer = "";
+
 			std::cout << "Do you want the income for a certain room (y for yes n for no)" << std::endl;
 			std::cin >> answer;
-			
+
 			if (answer == "y") {
 				std::cout << "What is the room number" << std::endl;
 				std::cin >> rooms_id;
 
 				if (Winston.get_room_by_code(rooms_id) != NULL) { // issue check it out
-					std::cout << Winston.calculate_income(rooms_id) << std::endl; //TODO prints the total? or not what we asked atleast
+					std::cout << Winston.calculate_income(rooms_id) << std::endl; //TODO check if the values are correctly calculated
 				}
 				else {
-					std::cout << "It looks like this room has no income" << std::endl;
+					std::cout << "It looks like there is no room with this id: " << rooms_id << std::endl; // i think this can never be reached but it shouldn't matter
 				}
 			}
 			else {
@@ -188,5 +185,6 @@ int main() {
 			}
 			break;
 		}
-	}
+		} // end switch
+	} // end while
 }
