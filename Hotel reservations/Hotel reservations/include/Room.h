@@ -42,8 +42,8 @@ Room() {
 //Overload constructor
 Room(int mCapacity, double pPrice) {
 	
-	this->maxCapacity = mCapacity;
-	this->pricePerson = pPrice;
+	maxCapacity = mCapacity;
+	pricePerson = pPrice;
 	for (int i = 0; i < 30; i++) {
 		this->availability.push_back(NULL);
 	}

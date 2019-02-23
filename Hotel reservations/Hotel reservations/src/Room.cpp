@@ -22,19 +22,20 @@ void Room::setPricePerson(double pricePerson) {
 }
  bool Room::addBook(Book* new_book) {
 	 if (new_book->getPeople() <= maxCapacity) {
-	 if(new_book->getArrival()+new_book->getDaysOfResidence()<30){
-		 for (unsigned int i = new_book->getArrival() - 1; i < new_book->getArrival() + new_book->getDaysOfResidence() - 1; i++) {
-				 if (availability[i] != NULL){
-				 availability[i] = new_book; 
-				 new_book->setRoom(this); 
-			 }
-			 else{
-			 return false;
-			 }
+	     if(new_book->getArrival()+new_book->getDaysOfResidence()<30){ //TODO make variables for these results and fix IF block
+	     	  for (unsigned int i = new_book->getArrival() - 1; i < new_book->getArrival() + new_book->getDaysOfResidence() - 1; i++) {
+	     	 		 if (availability[i] == NULL){
+	     	 		 availability[i] = new_book; 
+	     	 		 new_book->setRoom(this); 
+	     	 	 }
+	     	 	 else{
+	     	 	 return false;
+	     	 	 }
+	     	  }
+	     	  return true;
+	     
+	     return false;
 		 }
-		 return true;
-	 
-	 return false;}
 	 }
 	 else
 		 std::cout << "The room is either already booked or is too small" << std::endl;

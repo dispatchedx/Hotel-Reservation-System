@@ -5,8 +5,7 @@
 class RoomTE : public Room {//capacity, pricePerson, pricePerDay, couple
 	bool couple;
 	double pricePerDay;
-public: RoomTE(int maxCapacity, double pPrice, double pricePerDay, bool couple) {
-	Room::Room(maxCapacity, pPrice);
+public: RoomTE(int maxCapacity, double pPrice, double pricePerDay, bool couple) : Room::Room(maxCapacity, pPrice) {
 	RoomTE::setMaxCapacity(2);
 	RoomTE::couple = couple;
 	RoomTE::pricePerDay = pricePerDay;

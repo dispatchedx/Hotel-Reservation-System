@@ -5,8 +5,7 @@
 
 class RoomTD : public Room {//capacity, pricePerson, wifi
 	bool wifi;
-public: RoomTD(int mCapacity, double pPrice, bool wifi) {
-	Room::Room(mCapacity, pPrice);
+public: RoomTD(int mCapacity, double pPrice, bool wifi) : Room::Room(mCapacity, pPrice) {
 	RoomTD::wifi = wifi;
 }
 

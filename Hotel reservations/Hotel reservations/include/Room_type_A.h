@@ -6,8 +6,7 @@ class RoomTA : public Room {//capacity, pricePerson, pricePerDay
 	private:
 	double pricePerDay;
 public:
-RoomTA(int mCapacity, double pPrice, double pricePerDay) {
-	Room::Room(mCapacity, pPrice);
+RoomTA(int mCapacity, double pPrice, double pricePerDay) : Room(mCapacity, pPrice) {
 	this->pricePerDay = pricePerDay;
 }
 RoomTA() {

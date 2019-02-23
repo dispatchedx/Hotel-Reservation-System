@@ -26,7 +26,7 @@ int main() {
 	std::string cName;
 
 	Hotel Winston = Hotel("Winston");
-	RoomTA RA1 = RoomTA(4, 10, 40); //it puts default values instead of 4,10
+	RoomTA RA1 = RoomTA(4, 10,40); //it puts default values instead of 4,10
 	//RA1.setMaxCapacity(4);
 	//RA1.setPricePerson(10);
 	RoomTA* A1 = &RA1;
@@ -62,7 +62,7 @@ int main() {
 	for (int i = 0; i < 5; i++) {
 		int ran_people = rand() % 6;
 		int ran_arrival_day = rand() % 31 + 1;
-		int ran_days = rand() % (32 - ran_arrival_day) + +1;
+		int ran_days = rand() % 5 + 1; //(32 - ran_arrival_day) + +1;
 		int ran_string = rand() % 10;
 		std::string clientName = listName[ran_string];
 		Book* test = new Book(clientName, ran_arrival_day, ran_days, ran_people); //not like this
@@ -147,18 +147,18 @@ int main() {
 			Winston.cancel_booking(cancel_id);
 			break;
 		case 3:
-			std::cout << "Booking id Name of Customer Room id" << std::endl;
+			std::cout << "Booking id | Name of Customer | Room id" << std::endl;
 			for (int i = 0; i <= Winston.books_List.size() - 1; i++) {
-				std::cout << Winston.books_List.at(i)->getBookNumber() + "\t ";
-				std::cout << Winston.books_List.at(i)->getCustomerName() + " \t";
+				std::cout << Winston.books_List.at(i)->getBookNumber() + "\t |"; //TODO not working/appearing
+				std::cout << Winston.books_List.at(i)->getCustomerName() + " \t|";
 				std::cout << Winston.books_List.at(i)->getRoom().getRoomNumber() << std::endl;
 			}
 			break;
 		case 4:
-			std::cout << "room code percentage Income from this room" << std::endl;
+			std::cout << "room code | percentage | Income from this room" << std::endl;
 			for (int i = 0; i < Winston.rooms_List.size(); i++) {
-				std::cout << Winston.rooms_List.at(i)->getRoomNumber() << " ";
-				std::cout << Winston.rooms_List.at(i)->percentage() << " ";
+				std::cout << Winston.rooms_List.at(i)->getRoomNumber() << "\t  | ";
+				std::cout << Winston.rooms_List.at(i)->percentage() << "\t\t | ";
 				std::cout << Winston.rooms_List.at(i)->pricing() << std::endl;
 			}
 			break;
@@ -166,20 +166,25 @@ int main() {
 			Winston.booking_plan();
 			break;
 		case 6:
-			int rooms_id = 1;
+			int rooms_id = -1;
 			code = false;
-			std::cout << "Do you want the income for a certain room (true for yes false for no)" << std::endl;
-			std::cin >> code;
-			if (code) {
+			std::string answer = "";
+			std::cout << "Do you want the income for a certain room (y for yes n for no)" << std::endl;
+			std::cin >> answer;
+			
+			if (answer == "y") {
 				std::cout << "What is the room number" << std::endl;
-				rooms_id;
-			}
-			std::cin >> rooms_id;
-			if (Winston.get_room_by_code(rooms_id) != NULL) {
-				std::cout << Winston.calculate_income(rooms_id) << std::endl;
+				std::cin >> rooms_id;
+
+				if (Winston.get_room_by_code(rooms_id) != NULL) { // issue check it out
+					std::cout << Winston.calculate_income(rooms_id) << std::endl; //TODO prints the total? or not what we asked atleast
+				}
+				else {
+					std::cout << "It looks like this room has no income" << std::endl;
+				}
 			}
 			else {
-				std::cout << Winston.calculate_income() << std::endl;
+				std::cout << "Total income for this hotel is: " << Winston.calculate_income() << std::endl;
 			}
 			break;
 		}
