@@ -10,7 +10,7 @@ private:
 	int arrival;
 	int daysOfResidence;
 	int people;
-	int count = 0;
+	int count = -1;
 	Room* pRoom = NULL;
 	
 public:
@@ -46,6 +46,6 @@ int getPeople();
 
 void setPeople(int people);
 
-static int getBookNumber();
+int getBookNumber(); //TODO this was static
 };
 #endif // !BOOK_H

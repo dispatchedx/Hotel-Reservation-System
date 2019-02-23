@@ -99,6 +99,7 @@ int main() {
 		int people = 0;
 		bool code = false;
 		int cancel_id = 0;
+		std::string answer = "";
 		switch (input) {
 		case 1:
 			//	Book newbook;
@@ -122,18 +123,18 @@ int main() {
 			newbook->setArrival(arrival);
 			newbook->setPeople(people);
 			newbook->setDaysOfResidence(days);
-			std::cout << "Would you like a specific room? (true for yes false for no)" << std::endl;
-			std::cin >> code;
+			std::cout << "Would you like a specific room? (y for yes n for no)" << std::endl;
+			std::cin >> answer;
 
 
-			if (code) {
-				std::cout << "Which is the room's number?" << std::endl;
+			if (answer == "y") {
+				std::cout << "What is the room's ID?" << std::endl;
 				std::cin >> room_id;
-			}
-			if (Winston.get_room_by_code(room_id) != NULL) {
-				Winston.add_book_to_room(newbook, room_id);
-			}
 
+				if (Winston.get_room_by_code(room_id) != NULL) {
+					Winston.add_book_to_room(newbook, room_id);
+				}
+			}
 			else {
 				Winston.add_booking(newbook);
 			}
@@ -144,7 +145,7 @@ int main() {
 
 			std::cout << "What is the booking ID you want to cancel?" << std::endl;
 			std::cin >> cancel_id;
-			Winston.cancel_booking(cancel_id);
+			Winston.cancel_booking(cancel_id); //TODO this doesnt work need to fix, also prob something wrong with roomid/bookid
 			break;
 		case 3:
 			std::cout << "Booking id | Name of Customer | Room id" << std::endl;
@@ -168,7 +169,6 @@ int main() {
 		case 6:
 			int rooms_id = -1;
 			code = false;
-			std::string answer = "";
 			std::cout << "Do you want the income for a certain room (y for yes n for no)" << std::endl;
 			std::cin >> answer;
 			

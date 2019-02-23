@@ -3,7 +3,7 @@
 #include <vector>
 #include "iostream"
 
-int Room::roomNumber=0; 
+int Room::roomNumber=-1; 
 
 int Room::getMaxCapacity() {
 	return maxCapacity;

@@ -11,7 +11,7 @@ private:
 	double pricePerson;
 public:
 	int maxCapacity;
-	int r_count = 0;
+	int r_count = -1;
 	std::vector<Book*> availability;
 	static int roomNumber; //unique
 //getters+setters
@@ -41,7 +41,7 @@ Room() {
 }
 //Overload constructor
 Room(int mCapacity, double pPrice) {
-	
+	this->r_count = ++roomNumber;
 	maxCapacity = mCapacity;
 	pricePerson = pPrice;
 	for (int i = 0; i < 30; i++) {

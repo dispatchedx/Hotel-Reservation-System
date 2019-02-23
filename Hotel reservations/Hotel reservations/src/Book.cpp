@@ -2,7 +2,7 @@
 #include "../include/Book.h"
 #include "string"
 
-int Book::bookNumber=0;
+int Book::bookNumber=-1;
 std::string Book::getCustomerName() {
 	return customerName;
 }
@@ -34,5 +34,5 @@ void Book::setPeople(int people) {
 	this->people = people;
 }
 int Book::getBookNumber() { //used to be static
-	return bookNumber;
+	return count;
 }
