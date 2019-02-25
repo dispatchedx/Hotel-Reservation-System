@@ -60,8 +60,12 @@ void Room::setPricePerson(double pricePerson) {
 			return final_price;
 		}
 
-		bool Room::cancelBook(int cancelBookNumber) {
-			availability[cancelBookNumber] = NULL;
+		bool Room::cancelBook(int reservationID) {
+			int arrivalDay = availability[reservationID]->getArrival();
+			int daysStaying = availability[reservationID]->getDaysOfResidence();
+			for (int i = arrivalDay; i <= arrivalDay + daysStaying; i++) { //TODO check, though i think its fixed
+				availability[i] = NULL;
+			}
 			return true;
 		}
 

@@ -18,9 +18,9 @@ Room* Hotel::get_room_by_code(int code)// anaktisi domatiou apo kodiko
 }
 
 Book* Hotel::get_book_by_code(int book_id) { // anaktisi kratisis apo kodiko
-	for (int i = 0; i <= books_List.size(); ) {
-		if (books_List.at(book_id)->getBookNumber() == book_id)
-			return books_List.at(book_id);
+	for (int i = 0; i < books_List.size(); i++) {
+		if (books_List.at(i)->getBookNumber() == book_id)
+			return books_List.at(i);
 	}
 	return NULL;
 }
@@ -58,7 +58,9 @@ int Hotel::add_booking(Book* book) //prosthiki kratisis
 
 void Hotel::cancel_booking(int book_code) {//akurosi kratisis		*might not work*
 	bool test;
-	test = get_book_by_code(book_code)->getRoom().cancelBook(book_code);
+	Book* reservation = get_book_by_code(book_code);
+	Room room = reservation->getRoom(); //here we get acess violation when we get in, availability[i]->stuff are null
+	test = room.cancelBook(book_code);
 	if (test) {
 		books_List.erase(books_List.begin() + book_code); // might need parenthesis instead
 		std::cout << "Booking cancellation was successful." << std::endl;
