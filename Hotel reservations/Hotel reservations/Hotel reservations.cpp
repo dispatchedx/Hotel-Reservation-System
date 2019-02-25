@@ -132,12 +132,12 @@ int main() {
 
 			std::cout << "What is the booking ID you want to cancel?" << std::endl;
 			std::cin >> cancel_id;
-			Winston.cancel_booking(cancel_id); //TODO this doesnt work need to fix, also prob something wrong with roomid/bookid
+			Winston.cancel_booking(cancel_id);
 			break;
 		}
 		case 3:
 		{
-			std::cout << "Booking id | Name of Customer | Room id" << std::endl;
+			std::cout << "Booking id | Name of Customer | Room id" << std::endl;//TODO maybe catch error for empty booking
 			for (int i = 0; i <= Winston.books_List.size() - 1; i++) {
 				int reservation_id = Winston.books_List.at(i)->getBookNumber();
 				std::cout << " " << reservation_id << "\t | "; 
@@ -173,7 +173,7 @@ int main() {
 				std::cout << "What is the room number" << std::endl;
 				std::cin >> rooms_id;
 
-				if (Winston.get_room_by_code(rooms_id) != NULL) { // issue check it out
+				if (Winston.get_room_by_code(rooms_id) != NULL) {
 					std::cout << Winston.calculate_income(rooms_id) << std::endl; //TODO check if the values are correctly calculated
 				}
 				else {

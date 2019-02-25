@@ -62,7 +62,11 @@ void Hotel::cancel_booking(int book_code) {//akurosi kratisis		*might not work*
 	Room* room = reservation->getRoom();
 	int test = room->cancelBook(book_code); //TODO room still has income and numbers dont match up with id or something
 	if (test) {
-		books_List.erase(books_List.begin() + book_code); // might need parenthesis instead
+		for (int i = 0; i < books_List.size(); i++) {
+			if (books_List[i]->getBookNumber() == book_code) {
+				books_List.erase(books_List.begin()+i); // might need catch error for wrong id
+			}
+		}
 		std::cout << "Booking cancellation was successful." << std::endl;
 	}
 	else
