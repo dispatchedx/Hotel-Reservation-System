@@ -38,7 +38,8 @@ void setArrival(int arrival);
 int getDaysOfResidence();
 
 void setDaysOfResidence(int daysOfResidence);
-Room getRoom();
+
+Room* getRoom();
 
 void setRoom(Room* room);
 

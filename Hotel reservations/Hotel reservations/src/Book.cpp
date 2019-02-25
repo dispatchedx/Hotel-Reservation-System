@@ -21,8 +21,8 @@ int Book::getDaysOfResidence() {
 void Book::setDaysOfResidence(int daysOfResidence) {
 	this->daysOfResidence = daysOfResidence;
 }
-Room Book::getRoom() {
-	return *pRoom; // care
+Room* Book::getRoom() {
+	return pRoom; // care
 }
 void Book::setRoom(Room* room) {
 	this->pRoom = room;

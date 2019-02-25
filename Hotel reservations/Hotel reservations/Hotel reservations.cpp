@@ -142,7 +142,7 @@ int main() {
 				int reservation_id = Winston.books_List.at(i)->getBookNumber();
 				std::cout << " " << reservation_id << "\t | "; 
 				std::cout << Winston.books_List.at(i)->getCustomerName() << " \t| ";
-				std::cout << Winston.books_List.at(i)->getRoom().getRoomNumber() << std::endl;
+				std::cout << Winston.books_List.at(i)->getRoom()->getRoomNumber() << std::endl;
 			}
 			break;
 		}

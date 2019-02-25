@@ -48,36 +48,37 @@ void Room::setPricePerson(double pricePerson) {
 	 }
  }
 
- 
+double Room::pricing() {
+	double final_price = 0;
+	for (unsigned int i = 0; i<availability.size(); i++)
+	{
+		if (availability[i] != NULL)
+			final_price += pricePerson*availability[i]->getPeople();
+	}
+	return final_price;
+}
 
-		double Room::pricing() {
-			double final_price = 0;
-			for (unsigned int i = 0; i<availability.size(); i++)
-			{
-				if (availability[i] != NULL)
-					final_price += pricePerson*availability[i]->getPeople();
-			}
-			return final_price;
-		}
+bool Room::cancelBook(int reservationID) {
+	for (int i = 0; i < availability.size(); i++){
+		if (availability[i]!=NULL && availability[i]->getBookNumber() == reservationID)
+			availability[i] = NULL;
+	//int arrivalDay = availability[reservationID]->getArrival();
+	//int daysStaying = availability[reservationID]->getDaysOfResidence();
+	//for (int i = arrivalDay; i <= arrivalDay + daysStaying; i++) { //TODO check, though i think its fixed
+	//	availability[i] = NULL;
+	}
+	return true;
+}
 
-		bool Room::cancelBook(int reservationID) {
-			int arrivalDay = availability[reservationID]->getArrival();
-			int daysStaying = availability[reservationID]->getDaysOfResidence();
-			for (int i = arrivalDay; i <= arrivalDay + daysStaying; i++) { //TODO check, though i think its fixed
-				availability[i] = NULL;
-			}
-			return true;
-		}
-
-		int Room::percentage() {
-			double percentCount = 0;
-			for (unsigned int i = 0; i<availability.size(); i++)
-			{
-				if (availability[i] != NULL)
-					percentCount++;
-			}
-			return (percentCount / 30) * 100;
-		}
+int Room::percentage() {
+	double percentCount = 0;
+	for (unsigned int i = 0; i<availability.size(); i++)
+	{
+		if (availability[i] != NULL)
+			percentCount++;
+	}
+	return (percentCount / 30) * 100;
+}
 
 /*int main(){
 std::vector< Book* > availability;

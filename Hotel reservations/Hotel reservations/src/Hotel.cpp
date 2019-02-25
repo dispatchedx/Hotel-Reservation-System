@@ -26,7 +26,7 @@ Book* Hotel::get_book_by_code(int book_id) { // anaktisi kratisis apo kodiko
 }
 
 bool Hotel::add_book_to_room(Book* book, int roomcode) { //prosthiki kratisis se domatio
-	bool test = get_room_by_code(roomcode)->addBook(book); // TODO fix id is always 0 and last book is also the new book?
+	bool test = get_room_by_code(roomcode)->addBook(book); // TODO check id with deletion
 	if (test) {
 		books_List.push_back(book);
 		std::cout << "Reservation with id: " << book->getBookNumber() << " added to room with id: " << roomcode << std::endl;
@@ -57,10 +57,10 @@ int Hotel::add_booking(Book* book) //prosthiki kratisis
 }
 
 void Hotel::cancel_booking(int book_code) {//akurosi kratisis		*might not work*
-	bool test;
+//	bool test;
 	Book* reservation = get_book_by_code(book_code);
-	Room room = reservation->getRoom(); //here we get acess violation when we get in, availability[i]->stuff are null
-	test = room.cancelBook(book_code);
+	Room* room = reservation->getRoom();
+	int test = room->cancelBook(book_code); //TODO room still has income and numbers dont match up with id or something
 	if (test) {
 		books_List.erase(books_List.begin() + book_code); // might need parenthesis instead
 		std::cout << "Booking cancellation was successful." << std::endl;
