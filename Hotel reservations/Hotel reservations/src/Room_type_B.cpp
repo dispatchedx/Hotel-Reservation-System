@@ -21,6 +21,6 @@ double RoomTB::pricing() {
 }
 
 bool RoomTB::cancelBook(int cancelBookNumber) {
-	std::cout << "You cannot cancel a booking on this room." << std::endl;
-	return false;
+	std::cout << "You cannot cancel a reservation on this room." << std::endl;
+	return false; // this doesnt work
 }

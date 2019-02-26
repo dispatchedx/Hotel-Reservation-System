@@ -11,22 +11,22 @@ public:
 		this->hotelName = hotName;
 }
 	std::vector<Room*> rooms_List;
-	std::vector<Book*> books_List; //used to be private
+	std::vector<Book*> reservations_List; //used to be private
 	void add_Room(Room* newroom);
 
 	Room* get_room_by_code(int room_id);
 
-	Book* get_book_by_code(int book_id);
+	Book* get_reservation_by_code(int reservation_id);
 
-	bool add_book_to_room(Book* book, int roomcode);
-	int add_booking(Book* book);
-	void cancel_booking(int book_code);
+	bool add_reservation_to_room(Book* reservation, int roomcode);
+	int add_reservation(Book* reservation);
+	void cancel_reservation(int reservation_code);
 
 	double calculate_income(int room_code);
 
 	double calculate_income();
 
-	void booking_plan();
+	void reservation_plan();
 
 
 	

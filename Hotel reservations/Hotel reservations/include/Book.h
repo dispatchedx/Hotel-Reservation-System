@@ -6,7 +6,7 @@ class Room;
 class Book {
 private:
 	std::string customerName;
-	static int bookNumber; //unique
+	static int reservationNumber; //unique
 	int arrival;
 	int daysOfResidence;
 	int people;
@@ -15,12 +15,12 @@ private:
 	
 public:
   Book() {
-	this->count = ++bookNumber;
+	this->count = ++reservationNumber;
 }
 
 public: Book(std::string cName, int arrival, int dResidence, int people) {
 	this->customerName = cName;
-	this->count = ++bookNumber;
+	this->count = ++reservationNumber;
 	this->arrival = arrival;
 	this->daysOfResidence = dResidence;
 	this->people = people;

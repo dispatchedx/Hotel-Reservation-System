@@ -49,7 +49,7 @@ Room(int mCapacity, double pPrice) {
 	}
 }
 //Functions
-		bool addBook(Book* new_book); // prosthiki kratisis
+		bool addBook(Book* new_reservation); // prosthiki kratisis
 
 		double pricing();	// timologisis
 

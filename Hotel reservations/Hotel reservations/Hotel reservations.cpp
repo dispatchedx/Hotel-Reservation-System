@@ -20,9 +20,8 @@
 //exei polla bugs akoma
 class Room;
 int main() {
-	int ranvar = rand() % 30;
-	int input = 0;
-	Book* newbook = new Book;
+	//int ranvar = rand() % 30;
+	//Book* newreservation = new Book;
 	std::string cName;
 
 	Hotel Winston = Hotel("Winston");
@@ -66,28 +65,28 @@ int main() {
 		int ran_string = rand() % 10;
 		std::string clientName = listName[ran_string];
 		Book* test = new Book(clientName, ran_arrival_day, ran_days, ran_people); //not like this
-		Winston.add_booking(test);
+		Winston.add_reservation(test);
 
 		srand(time(NULL));
 		int dice = rand() % 101 + 1;
 		if (dice < 25) {
-			int eraser = rand() % Winston.books_List.size();
-			//Winston.books_List.erase(Winston.books_List.begin() + eraser);		exei 25% pithanotita na diagrapsei, alla den diagrafei.. 
-	//		Winston.cancel_booking(Winston.books_List[eraser]->getBookNumber());            FIX THIS
+			int eraser = rand() % Winston.reservations_List.size();
+			//Winston.reservations_List.erase(Winston.reservations_List.begin() + eraser);		exei 25% pithanotita na diagrapsei, alla den diagrafei.. 
+	//		Winston.cancel_reservation(Winston.reservations_List[eraser]->getBookNumber());            FIX THIS
 		}
 	}
 
-
+	int input = 0;
 	while (input != 99) {
 		std::cout << "Choose an option:" << std::endl;
-		std::cout << "1. Add a booking " << std::endl;
-		std::cout << "2. Cancel a booking  " << std::endl;
-		std::cout << "3. View hotel's booking " << std::endl;
+		std::cout << "1. Add a reservation " << std::endl;
+		std::cout << "2. Cancel a reservation  " << std::endl;
+		std::cout << "3. View hotel's reservation " << std::endl;
 		std::cout << "4. View all the rooms of the hotel" << std::endl;
-		std::cout << "5. View booking plan" << std::endl;
+		std::cout << "5. View reservation plan" << std::endl;
 		std::cout << "6. View income" << std::endl;
 		std::cout << "99. exit" << std::endl;
-		std::cout << "Press any other key to refresh" << std::endl;
+		std::cout << "Press any other number to refresh" << std::endl;
 		std::cin.clear();
 		//std::cin.ignore();
 		std::cin >> input;
@@ -100,6 +99,7 @@ int main() {
 			int days = -1;
 			int people = -1;
 			std::string answer = "";
+			std::string cName;
 
 			std::cout << "What is your name?" << std::endl;
 			std::cin.ignore();
@@ -110,7 +110,7 @@ int main() {
 			std::cin >> days;
 			std::cout << "How many people will stay?" << std::endl;
 			std::cin >> people;
-			Book* p_newbook = new Book(cName, arrival, people, days);
+			Book* p_newreservation = new Book(cName, arrival, days, people);
 			std::cout << "Would you like a specific room? (y for yes n for no)" << std::endl;
 			std::cin >> answer;
 			if (answer == "y") {
@@ -118,11 +118,11 @@ int main() {
 				std::cin >> room_id;
 
 				if (Winston.get_room_by_code(room_id) != NULL) {
-					Winston.add_book_to_room(p_newbook, room_id);
+					Winston.add_reservation_to_room(p_newreservation, room_id);
 				}
 			}
 			else {
-				Winston.add_booking(p_newbook);
+				Winston.add_reservation(p_newreservation);
 			}
 			break;
 		}
@@ -130,19 +130,19 @@ int main() {
 		{
 			int cancel_id = -1;
 
-			std::cout << "What is the booking ID you want to cancel?" << std::endl;
+			std::cout << "What is the reservation ID you want to cancel?" << std::endl;
 			std::cin >> cancel_id;
-			Winston.cancel_booking(cancel_id);
+			Winston.cancel_reservation(cancel_id);
 			break;
 		}
 		case 3:
 		{
-			std::cout << "Booking id | Name of Customer | Room id" << std::endl;//TODO maybe catch error for empty booking
-			for (int i = 0; i <= Winston.books_List.size() - 1; i++) {
-				int reservation_id = Winston.books_List.at(i)->getBookNumber();
+			std::cout << "Booking id | Name of Customer | Room id" << std::endl;//TODO maybe catch error for empty reservation
+			for (int i = 0; i <= Winston.reservations_List.size() - 1; i++) {
+				int reservation_id = Winston.reservations_List.at(i)->getBookNumber();
 				std::cout << " " << reservation_id << "\t | "; 
-				std::cout << Winston.books_List.at(i)->getCustomerName() << " \t| ";
-				std::cout << Winston.books_List.at(i)->getRoom()->getRoomNumber() << std::endl;
+				std::cout << Winston.reservations_List.at(i)->getCustomerName() << " \t| ";
+				std::cout << Winston.reservations_List.at(i)->getRoom()->getRoomNumber() << std::endl;
 			}
 			break;
 		}
@@ -158,7 +158,7 @@ int main() {
 		}
 		case 5:
 		{
-			Winston.booking_plan();
+			Winston.reservation_plan();
 			break;
 		}
 		case 6:

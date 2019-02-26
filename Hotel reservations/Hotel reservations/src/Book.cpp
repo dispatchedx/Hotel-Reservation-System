@@ -2,7 +2,7 @@
 #include "../include/Book.h"
 #include "string"
 
-int Book::bookNumber=-1;
+int Book::reservationNumber=-1;
 std::string Book::getCustomerName() {
 	return customerName;
 }

@@ -2,7 +2,7 @@
 #include "iostream"
 #include "../include/Hotel.h"
 std::vector<Room> rooms_List;
-std::vector<Book> books_List;
+std::vector<Book> reservations_List;
 void Hotel::add_Room(Room* newroom) { //always adds room, and not roomtype
 	rooms_List.push_back(newroom);
 }
@@ -17,19 +17,19 @@ Room* Hotel::get_room_by_code(int code)// anaktisi domatiou apo kodiko
 
 }
 
-Book* Hotel::get_book_by_code(int book_id) { // anaktisi kratisis apo kodiko
-	for (int i = 0; i < books_List.size(); i++) {
-		if (books_List.at(i)->getBookNumber() == book_id)
-			return books_List.at(i);
+Book* Hotel::get_reservation_by_code(int reservation_id) { // anaktisi kratisis apo kodiko
+	for (int i = 0; i < reservations_List.size(); i++) {
+		if (reservations_List.at(i)->getBookNumber() == reservation_id)
+			return reservations_List.at(i);
 	}
 	return NULL;
 }
 
-bool Hotel::add_book_to_room(Book* book, int roomcode) { //prosthiki kratisis se domatio
-	bool test = get_room_by_code(roomcode)->addBook(book); // TODO check id with deletion
+bool Hotel::add_reservation_to_room(Book* reservation, int roomcode) { //prosthiki kratisis se domatio
+	bool test = get_room_by_code(roomcode)->addBook(reservation); // TODO check id with deletion
 	if (test) {
-		books_List.push_back(book);
-		std::cout << "Reservation with id: " << book->getBookNumber() << " added to room with id: " << roomcode << std::endl;
+		reservations_List.push_back(reservation);
+		std::cout << "Reservation with id: " << reservation->getBookNumber() << " added to room with id: " << roomcode << std::endl;
 		return true;
 	}
 	else {
@@ -39,13 +39,13 @@ bool Hotel::add_book_to_room(Book* book, int roomcode) { //prosthiki kratisis se
 	}
 }
 
-int Hotel::add_booking(Book* book) //prosthiki kratisis
+int Hotel::add_reservation(Book* reservation) //prosthiki kratisis
 {
 	int value = 0;
 	for (int i = 0; i < rooms_List.size()-1; i++){
-		if (rooms_List.at(i)->addBook(book)){
-			books_List.push_back(book);
-			std::cout << "Booking was successful!The booking code is " << book->getBookNumber() << std::endl;
+		if (rooms_List.at(i)->addBook(reservation)){
+			reservations_List.push_back(reservation);
+			std::cout << "Booking was successful!The reservation code is " << reservation->getBookNumber() << std::endl;
 			return value = rooms_List.at(i)->getRoomNumber();
 		}
 	}
@@ -56,15 +56,15 @@ int Hotel::add_booking(Book* book) //prosthiki kratisis
 	return value;
 }
 
-void Hotel::cancel_booking(int book_code) {//akurosi kratisis		*might not work*
+void Hotel::cancel_reservation(int reservation_code) {//akurosi kratisis		*might not work*
 //	bool test;
-	Book* reservation = get_book_by_code(book_code);
+	Book* reservation = get_reservation_by_code(reservation_code);
 	Room* room = reservation->getRoom();
-	int test = room->cancelBook(book_code); //TODO room still has income and numbers dont match up with id or something
+	int test = room->cancelBook(reservation_code); //TODO room still has income and numbers dont match up with id or something
 	if (test) {
-		for (int i = 0; i < books_List.size(); i++) {
-			if (books_List[i]->getBookNumber() == book_code) {
-				books_List.erase(books_List.begin()+i); // might need catch error for wrong id
+		for (int i = 0; i < reservations_List.size(); i++) {
+			if (reservations_List[i]->getBookNumber() == reservation_code) {
+				reservations_List.erase(reservations_List.begin()+i); // might need catch error for 
 			}
 		}
 		std::cout << "Booking cancellation was successful." << std::endl;
@@ -85,7 +85,7 @@ double Hotel::calculate_income() {	// upologismos esodon;sunolika esoda
 	return final_income;
 }
 
-void Hotel::booking_plan() { //plano kratiseon
+void Hotel::reservation_plan() { //plano kratiseon
 	std::cout << " Room    01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30" << std::endl;
 	for (int i = 0; i<rooms_List.size(); i++) {
 		std::cout << "  " << rooms_List.at(i)->getRoomNumber() << "_ \t ";

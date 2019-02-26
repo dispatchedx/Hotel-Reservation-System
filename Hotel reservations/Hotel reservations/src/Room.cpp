@@ -20,23 +20,23 @@ void Room::setPricePerson(double pricePerson) {
  int Room::getRoomNumber() { //maybe need to put it static.. NO STATIC IN CPP ONLY ON HEADERS
 	return r_count;
 }
- bool Room::addBook(Book* new_book) {
-	 if (new_book->getPeople() <= maxCapacity) {
-		 int res_arrival = new_book->getArrival();
-		 int res_days_residence = new_book->getDaysOfResidence();
-		 if (res_arrival + res_days_residence-1 <= 30) { //TODO make variables for these results and fix IF block
+ bool Room::addBook(Book* new_reservation) {
+	 if (new_reservation->getPeople() <= maxCapacity) {
+		 int res_arrival = new_reservation->getArrival();
+		 int res_days_residence = new_reservation->getDaysOfResidence();
+		 if (res_arrival + res_days_residence-1 <= 30) { //TODO make variables for these results also what if they are negative?
 			 for (unsigned int i = res_arrival - 1; i < res_arrival + res_days_residence - 1; i++) {
 				 if (availability[i] != NULL) {
 					 return false;
 				 }
 			 }
 			 for (unsigned int i = res_arrival - 1; i < res_arrival + res_days_residence - 1; i++) {
-				 availability[i] = new_book;
-				 new_book->setRoom(this);
+				 availability[i] = new_reservation;
+				 new_reservation->setRoom(this);
 			 }
 		 }
 		 else {
-			 std::cout << "The room is either already booked or is too small" << std::endl;
+			 std::cout << "Currently the program works for a specific month, and clients, can't stay after 30 day period" << std::endl;
 			 return false;
 		 }
 		 return true;

@@ -11,6 +11,6 @@ public: RoomTC(int mCapacity, double pPrice, int leastPeople, int leastDays) : R
 	RoomTC::leastPeople = leastPeople;
 }
 
-		bool addBook(Book* new_book);
+		bool addBook(Book* new_reservation);
 };
 #endif
