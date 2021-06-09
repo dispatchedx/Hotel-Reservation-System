@@ -1,2 +1,2 @@
-# Project-cpp
-University assignment to implement some hotel functions
+## Hotel-Reservation-System
+A simple command-line hotel reservation system.
