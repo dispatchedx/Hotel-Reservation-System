@@ -4,26 +4,21 @@ CXXFLAGS = -std=c++11 -Wall -Wextra -Iinclude
 
 # Directories
 SRC_DIR = src
-OBJ_DIR = obj
-BIN_DIR = bin
 
 # Main file
 MAIN_FILE = Hotel_reservations.cpp
 
 # Target executable
-TARGET = $(BIN_DIR)/hotel_program
+TARGET = hotel_program
 
 # Source files
 SRC_FILES = $(wildcard $(SRC_DIR)/*.cpp) $(MAIN_FILE)
 
 # Object files
-OBJ_FILES = $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(notdir $(SRC_FILES)))
-
-# Create the necessary directories
-$(shell mkdir -p $(OBJ_DIR) $(BIN_DIR))
+OBJ_FILES = $(patsubst %.cpp, %.o, $(notdir $(SRC_FILES)))
 
 # Default target
-all: $(TARGET)
+all: $(TARGET) clean_obj
 
 # Link the target executable
 $(TARGET): $(OBJ_FILES)
@@ -31,18 +26,23 @@ $(TARGET): $(OBJ_FILES)
 	@echo "Linked $(TARGET)"
 
 # Compile source files into object files
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+%.o: $(SRC_DIR)/%.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 	@echo "Compiled $< into $@"
 
-$(OBJ_DIR)/%.o: %.cpp
+%.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 	@echo "Compiled $< into $@"
 
-# Clean up build files
-clean:
-	rm -rf $(OBJ_DIR)/*.o $(TARGET)
-	@echo "Cleaned up build files"
+# Clean up object files
+clean_obj:
+	rm -f *.o
+	@echo "Cleaned up object files"
+
+# Clean up all build files
+clean: clean_obj
+	rm -f $(TARGET)
+	@echo "Cleaned up all build files"
 
 # Phony targets
-.PHONY: all clean
+.PHONY: all clean clean_obj
