@@ -3,7 +3,7 @@
 
 #include "pch.h"
 #include "vector"
-#include "Random"
+#include "random"
 #include "string"
 #include "cstdlib"
 #include "iostream"
@@ -18,11 +18,22 @@
 #include "include/Hotel.h"
 
 //exei polla bugs akoma
+
+/* TODO known bugs
+	handle 0/0/0/0/0 or just NULL input
+
+*/
+
+/* possible features
+	add/remove rooms
+	adjust pricing
+	connection possiblity to real databases (mysql)
+	tell the dates that are already reserved when unsucessful?
+*/
 class Room;
 int main() {
 	//int ranvar = rand() % 30;
 	//Book* newreservation = new Book;
-	std::string cName;
 
 	Hotel Winston = Hotel("Winston");
 	RoomTA RA1 = RoomTA(4, 10,40); //it puts default values instead of 4,10
@@ -78,7 +89,7 @@ int main() {
 
 	int input = 0;
 	while (input != 99) {
-		std::cout << "Choose an option:" << std::endl;
+		std::cout << "\nChoose an option:" << std::endl;
 		std::cout << "1. Add a reservation " << std::endl;
 		std::cout << "2. Cancel a reservation  " << std::endl;
 		std::cout << "3. View hotel's reservation " << std::endl;
@@ -88,7 +99,7 @@ int main() {
 		std::cout << "99. exit" << std::endl;
 		std::cout << "Press any other number to refresh" << std::endl;
 		std::cin.clear();
-		//std::cin.ignore();
+		std::cin.ignore();
 		std::cin >> input;
 
 		switch (input) {
@@ -104,13 +115,24 @@ int main() {
 			std::cout << "What is your name?" << std::endl;
 			std::cin.ignore();
 			getline(std::cin, cName);
+			if (cName.empty()){ std::cout <<  "Incorrect Value, please try again"; continue;}
+			
 			std::cout << "When will you arrive?" << std::endl;
 			std::cin >> arrival;
+			if (std::cin.fail()){std::cout <<  "Invalid input, please enter a number between 1-30";continue;}
+			if (arrival<1 || arrival > 30) { std::cout <<  "Please enter a number between 1-30";continue;}
+			
 			std::cout << "How many days will you stay?" << std::endl;
 			std::cin >> days;
+			if (std::cin.fail()){std::cout <<  "Invalid input, please enter a number between 1-30";continue;}
+			if (days<1 || days > 30) { std::cout <<  "Please enter a number between 1-30";continue;}
+			
 			std::cout << "How many people will stay?" << std::endl;
 			std::cin >> people;
+			if (std::cin.fail()){std::cout <<  "Invalid input, please enter a number between 1-5";continue;}
+			if (days<1 || days > 30) { std::cout <<  "Please enter a number between 1-5";continue;}			
 			Book* p_newreservation = new Book(cName, arrival, days, people);
+			
 			std::cout << "Would you like a specific room? (y for yes n for no)" << std::endl;
 			std::cin >> answer;
 			if (answer == "y") {
