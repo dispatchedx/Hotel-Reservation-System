@@ -20,7 +20,7 @@
 //exei polla bugs akoma
 
 /* TODO known bugs
-	handle 0/0/0/0/0 or just NULL input
+	?
 
 */
 
