@@ -1,4 +1,3 @@
-#include "../pch.h"
 #include "iostream"
 #include "../include/Hotel.h"
 std::vector<Room> rooms_List;

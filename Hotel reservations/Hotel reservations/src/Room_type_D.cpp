@@ -1,4 +1,3 @@
-#include "../pch.h"
 #include "../include/Room_type_D.h"
 
 double RoomTD::pricing() {

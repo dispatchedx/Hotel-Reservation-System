@@ -1,4 +1,3 @@
-#include "../pch.h"
 #include "../include/Room_type_B.h"
 #include "iostream"
 double RoomTB::pricing() {

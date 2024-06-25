@@ -1,4 +1,3 @@
-#include "../pch.h"
 #include "../include/Room.h"
 #include <vector>
 #include "iostream"

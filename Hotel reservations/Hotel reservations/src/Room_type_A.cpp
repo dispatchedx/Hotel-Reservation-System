@@ -1,4 +1,3 @@
-#include "../pch.h"
 #include "../include/Room_type_A.h"
 double RoomTA::pricing() {
 	double final_price = 0;

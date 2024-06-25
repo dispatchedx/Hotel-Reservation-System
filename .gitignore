@@ -259,3 +259,6 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+Hotel reservations/Hotel reservations/.vscode/tasks.json
+Hotel reservations/Hotel reservations/.vscode/settings.json
+Hotel reservations/Hotel reservations/hotel_program
