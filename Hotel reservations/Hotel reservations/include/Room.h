@@ -36,7 +36,7 @@ int getRoomNumber();
 Room() {
 	this->r_count = ++roomNumber;
 	for (int i = 0; i < 30; i++) {
-		this->availability.push_back(NULL);
+		this->availability.push_back(nullptr);
 	}
 }
 //Overload constructor
@@ -45,7 +45,7 @@ Room(int mCapacity, double pPrice) {
 	maxCapacity = mCapacity;
 	pricePerson = pPrice;
 	for (int i = 0; i < 30; i++) {
-		this->availability.push_back(NULL);
+		this->availability.push_back(nullptr);
 	}
 }
 //Functions
